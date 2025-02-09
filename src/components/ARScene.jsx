@@ -56,7 +56,7 @@ function ARScene() {
 
   return (
     <a-scene
-      mindar-image={`imageTargetSrc: ${targetMind}; autoStart: true;`}
+      mindar-image={`imageTargetSrc: ${targetMind}; autoStart: true; maxTrack: 1; warmupTolerance: 3; missTolerance: 3;`}
       color-space="sRGB"
       renderer="colorManagement: true, physicallyCorrectLights"
       embedded
@@ -83,7 +83,7 @@ function ARScene() {
           height="0.552"
           width="1"
           rotation="0 0 0"
-          material="shader: flat; transparent: true"
+          material="shader: flat; transparent: true; alphaTest: 0.5"
         ></a-video>
       </a-entity>
     </a-scene>
