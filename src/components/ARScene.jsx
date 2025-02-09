@@ -13,6 +13,7 @@ function ARScene() {
     // AR system ready
     sceneEl.addEventListener("arReady", () => {
       console.log("AR is ready");
+      videoEl.play().catch(console.error);
     });
 
     // AR system error
@@ -23,7 +24,7 @@ function ARScene() {
     // Target found/lost events
     targetEl?.addEventListener("targetFound", () => {
       console.log("target found");
-      videoEl.play();
+      videoEl.play().catch(console.error);
     });
 
     targetEl?.addEventListener("targetLost", () => {
@@ -52,12 +53,12 @@ function ARScene() {
         <video
           id="bop-video"
           src="/bop.mp4"
-          preload="auto"
+          preload="metadata"
           loop="true"
           crossOrigin="anonymous"
-          playsInline={true}
-          autoPlay={true}
-          muted={true}
+          playsInline
+          autoPlay
+          muted
         ></video>
       </a-assets>
 
@@ -69,6 +70,7 @@ function ARScene() {
           height="0.552"
           width="1"
           rotation="0 0 0"
+          material="shader: flat"
         ></a-video>
       </a-entity>
     </a-scene>
