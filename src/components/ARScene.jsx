@@ -2,7 +2,7 @@ import "mind-ar/dist/mindar-image.prod.js";
 import "aframe";
 import "mind-ar/dist/mindar-image-aframe.prod.js";
 import targetMind from "../assets/targets.mind?url";
-import videoFile from "../assets/BOP.mp4?url";
+import videoFile from "../assets/PhillyVsKC.mp4?url";
 import { useEffect } from "react";
 
 function ARScene() {
