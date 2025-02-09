@@ -2,6 +2,7 @@ import "mind-ar/dist/mindar-image.prod.js";
 import "aframe";
 import "mind-ar/dist/mindar-image-aframe.prod.js";
 import targetMind from "../assets/targets.mind?url";
+import videoFile from "../assets/BOP.mp4?url";
 import { useEffect } from "react";
 
 function ARScene() {
@@ -52,9 +53,9 @@ function ARScene() {
       <a-assets>
         <video
           id="bop-video"
-          src="/bop.mp4"
-          preload="metadata"
-          loop="true"
+          src={videoFile}
+          preload="auto"
+          loop
           crossOrigin="anonymous"
           playsInline
           autoPlay
@@ -70,7 +71,7 @@ function ARScene() {
           height="0.552"
           width="1"
           rotation="0 0 0"
-          material="shader: flat"
+          material="shader: flat; transparent: true"
         ></a-video>
       </a-entity>
     </a-scene>
