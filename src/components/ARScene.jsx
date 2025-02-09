@@ -11,11 +11,21 @@ function ARScene() {
     const videoEl = document.querySelector("#bop-video");
     const targetEl = document.querySelector("#target-container");
 
+    // Initial audio setup
+    const setupAudio = async () => {
+      try {
+        await videoEl.play();
+        videoEl.volume = 1.0;
+        videoEl.muted = false;
+      } catch (error) {
+        console.error("Audio setup failed:", error);
+      }
+    };
+
     // AR system ready
     sceneEl.addEventListener("arReady", () => {
       console.log("AR is ready");
-      videoEl.volume = 1.0; // Set volume to max
-      videoEl.play().catch(console.error);
+      setupAudio();
     });
 
     // AR system error
@@ -26,7 +36,8 @@ function ARScene() {
     // Target found/lost events
     targetEl?.addEventListener("targetFound", () => {
       console.log("target found");
-      videoEl.volume = 1.0; // Ensure volume is on
+      videoEl.volume = 1.0;
+      videoEl.muted = false;
       videoEl.play().catch(console.error);
     });
 
@@ -34,16 +45,6 @@ function ARScene() {
       console.log("target lost");
       videoEl.pause();
     });
-
-    // Add user interaction handler for audio
-    document.addEventListener(
-      "click",
-      () => {
-        videoEl.volume = 1.0;
-        videoEl.muted = false;
-      },
-      { once: true }
-    );
 
     return () => {
       targetEl?.removeEventListener("targetFound", () => {});
