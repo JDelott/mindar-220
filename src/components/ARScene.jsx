@@ -92,7 +92,7 @@ function ARScene() {
         <a-video
           src="#dom-video"
           position="0 0 0"
-          height="0.75"
+          height="0.9"
           width="1"
           rotation="0 0 0"
           material="shader: flat; transparent: true; alphaTest: 0.5"
