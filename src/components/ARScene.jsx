@@ -11,38 +11,44 @@ function ARScene() {
     const videoEl = document.querySelector("#dom-video");
     const targetEl = document.querySelector("#target-container");
 
-    // Initial audio setup
-    const setupAudio = async () => {
-      try {
-        await videoEl.play();
-        videoEl.volume = 1.0;
-        videoEl.muted = false;
-      } catch (error) {
-        console.error("Audio setup failed:", error);
-      }
+    // Add a user interaction handler for mobile browsers
+    const handleUserInteraction = () => {
+      videoEl.muted = false;
+      videoEl.volume = 1.0;
+      videoEl.play().catch(console.error);
+      console.log("User interaction - trying to play video");
     };
+
+    // Add interaction listeners
+    document.addEventListener("click", handleUserInteraction, { once: true });
+    document.addEventListener("touchstart", handleUserInteraction, {
+      once: true,
+    });
 
     // AR system ready
     sceneEl.addEventListener("arReady", () => {
       console.log("AR is ready");
-      setupAudio();
-    });
-
-    // AR system error
-    sceneEl.addEventListener("arError", () => {
-      console.log("AR failed to start");
     });
 
     // Target found/lost events
     targetEl?.addEventListener("targetFound", () => {
       console.log("target found");
-      videoEl.muted = false;
-      videoEl.volume = 1.0;
 
-      // Force a new play() attempt when target is found
-      videoEl.currentTime = 0;
-      videoEl.load();
-      videoEl.play().catch(console.error);
+      // Create a forced user action to enable audio
+      const playPromise = videoEl.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            videoEl.muted = false;
+            videoEl.volume = 1.0;
+            console.log("Video playing with audio");
+          })
+          .catch((error) => {
+            console.error("Play error:", error);
+            // Show a play button or message to user
+            alert("Tap the screen to enable audio");
+          });
+      }
     });
 
     targetEl?.addEventListener("targetLost", () => {
@@ -51,10 +57,11 @@ function ARScene() {
     });
 
     return () => {
+      document.removeEventListener("click", handleUserInteraction);
+      document.removeEventListener("touchstart", handleUserInteraction);
       targetEl?.removeEventListener("targetFound", () => {});
       targetEl?.removeEventListener("targetLost", () => {});
       sceneEl?.removeEventListener("arReady", () => {});
-      sceneEl?.removeEventListener("arError", () => {});
     };
   }, []);
 
