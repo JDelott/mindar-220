@@ -36,8 +36,12 @@ function ARScene() {
     // Target found/lost events
     targetEl?.addEventListener("targetFound", () => {
       console.log("target found");
-      videoEl.volume = 1.0;
       videoEl.muted = false;
+      videoEl.volume = 1.0;
+
+      // Force a new play() attempt when target is found
+      videoEl.currentTime = 0;
+      videoEl.load();
       videoEl.play().catch(console.error);
     });
 
@@ -72,6 +76,7 @@ function ARScene() {
           crossOrigin="anonymous"
           playsInline
           autoPlay
+          muted
         ></video>
       </a-assets>
 
