@@ -89,14 +89,14 @@ function ARScene() {
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
       <a-entity id="target-container" mindar-image-target="targetIndex: 0">
-        <a-video
+        <a-plane
           src="#dom-video"
           position="0 0 0"
-          height="0.9"
+          height="0.5"
           width="1"
           rotation="0 0 0"
-          material="shader: flat; transparent: true; alphaTest: 0.5"
-        ></a-video>
+          material="shader: flat; transparent: true; alphaTest: 0.5; color: #FFFFFF"
+        ></a-plane>
       </a-entity>
     </a-scene>
   );
