@@ -2,13 +2,13 @@ import "mind-ar/dist/mindar-image.prod.js";
 import "aframe";
 import "mind-ar/dist/mindar-image-aframe.prod.js";
 import targetMind from "../assets/targets.mind?url";
-import videoFile from "../assets/PhillyVsKC.mp4?url";
+import videoFile from "../assets/BigDomExperience.MP4?url";
 import { useEffect } from "react";
 
 function ARScene() {
   useEffect(() => {
     const sceneEl = document.querySelector("a-scene");
-    const videoEl = document.querySelector("#bop-video");
+    const videoEl = document.querySelector("#dom-video");
     const targetEl = document.querySelector("#target-container");
 
     // Initial audio setup
@@ -65,7 +65,7 @@ function ARScene() {
     >
       <a-assets>
         <video
-          id="bop-video"
+          id="dom-video"
           src={videoFile}
           preload="auto"
           loop
@@ -78,7 +78,7 @@ function ARScene() {
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
       <a-entity id="target-container" mindar-image-target="targetIndex: 0">
         <a-video
-          src="#bop-video"
+          src="#dom-video"
           position="0 0 0"
           height="0.552"
           width="1"
